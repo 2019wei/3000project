@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="Scripts/jquery-3.0.0.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+</head>
+<script>
+//  const uri = `https://3000.gov.tw/hpgapi-openmap/api/getPostData`;
+//  var alldata 
+// fetch(uri, {method:'GET'})
+// .then(res => {
+//     alldata = res.json();
+//     return alldata;   // 使用 text() 可以得到純文字 String
+// }).then(result => {
+//     console.log(result); // 得到「你的名字是：oxxo，年紀：18 歲。」
+// });
+window.onload = function(){
+var yunlindata = null
+$.ajax({ 
+url:'https://3000.gov.tw/hpgapi-openmap/api/getPostData', 
+type:'get', 
+data:{}, 
+async : false, //預設為true 非同步 
+error:function(){ 
+alert('重新整理一次'); 
+}, 
+success:function(data){ 
+yunlindata = data.filter(function(value){
+    return value.hsnCd == 'P' && value.zipCd == '640'
+})
+console.log(yunlindata)
+showTable(yunlindata)
+}
+});
+}
+function showTable(getData){
+    var table2 = ""
+
+    for(var i =0;getData.length;i++){
+        var str = "";
+        str += "<table class='table table-dark table-striped'>" 
+        str += "<tr>"
+        str += "<td>" +getData[i]['storeNm'] + "</td>"
+        str += "<td>" +getData[i]['busiTime'] + "</td>"
+        str += "</tr>"
+        str += "<tr>"
+        str += "<td>存量</td>"
+        str += "<td>"+getData[i]['total']+"</td>"
+        str += "</tr>"
+        str += "<tr>"
+        str += "<td>更新時間</td>"
+        str += "<td>"+getData[i]['updateTime']+"</td>"
+        str += "</tr>"
+        str += "</table>"
+        
+        if (getData[i]['storeCd'] =='030100') document.getElementById('table1').innerHTML =str;
+        if (getData[i]['storeCd'] =='030104') document.getElementById('table2').innerHTML =str;
+        if (getData[i]['storeCd'] =='030103') document.getElementById('table3').innerHTML =str;
+        if (getData[i]['storeCd'] =='030105') document.getElementById('table4').innerHTML =str;
+        if (getData[i]['storeCd'] =='030102') document.getElementById('table5').innerHTML =str;
+            
+         
+    }
+}
+
+
+
+</script>
+<body style="background-color: #D3D3D3; font-family: Microsoft JhengHei;" >
+    <div class="container-fluid">
+<div class="d-flex justify-content-center"><img src="./Img/post.png" class="img-fluid"></div>
+<div id='first' style="position: relative;">
+  <!--  -->
+       <div>
+           <div id='table1'>
+
+           </div>
+       </div>
+
+  <!--  -->
+  <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+      顯示/隱藏 地圖位置
+    </a>
+  </p>
+  <div class="collapse" id="collapseExample1">
+    <div class="card card-body" style="max-width: 350px;">
+        <iframe src="https://www.google.com/maps/embed?pb=!4v1594861891579!6m8!1m7!1sld-zNepQTxBmvTSndl4kmA!2m2!1d23.70682687398239!2d120.5397825419494!3f249.58455!4f0!5f0.7820865974627469" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <iframe 
+        width="300" 
+        height="300" 
+        frameborder="0" 
+        style="border:0" 
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCU9nbYDSYru_8OjeerfYllDsBtf5g0qFg&q=斗六西平路郵局" 
+        allowfullscreen>
+    </iframe>
+    </div>
+  </div>
+</div>
+<!--  -->
+    <div id='second' style="position: relative;">
+        <!--  -->
+    <div id='table2'>
+        
+    </div>
+
+<!--  -->
+<p>
+ <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample">
+    顯示/隱藏 地圖位置
+ </a>
+</p>
+<div class="collapse" id="collapseExample2">
+ <div class="card card-body"  style="max-width: 350px;">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1594861993315!6m8!1m7!1sj6NtZWlpcSHNnwxXXY9sTw!2m2!1d23.71310781213107!2d120.5398092877052!3f232.9899!4f0!5f0.7820865974627469" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+     <iframe 
+     width="300" 
+     height="300" 
+     frameborder="0" 
+     style="border:0" 
+     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCU9nbYDSYru_8OjeerfYllDsBtf5g0qFg&q=斗六鎮北郵局" 
+     allowfullscreen>
+ </iframe>
+ </div>
+</div>
+<!--  -->
+    </div>
+    <div id='third' style="position: relative;">
+         <!--  -->
+       <div>
+        <div id='table3'>
+
+        </div>
+    </div>
+
+<!--  -->
+<p>
+ <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample">
+   顯示/隱藏 地圖位置
+ </a>
+</p>
+<div class="collapse" id="collapseExample3">
+ <div class="card card-body"  style="max-width: 350px;">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1594862033341!6m8!1m7!1s707TXlvJrMu3Ct7i9zBXsA!2m2!1d23.72159828527565!2d120.5890495354145!3f348.46533!4f0!5f0.7820865974627469" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <iframe 
+     width="300" 
+     height="300" 
+     frameborder="0" 
+     style="border:0" 
+     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCU9nbYDSYru_8OjeerfYllDsBtf5g0qFg&q=斗六石榴郵局" 
+     allowfullscreen>
+ </iframe>
+ </div>
+</div>
+</div>
+<!--  -->
+    <div id='fourth' style="position: relative;">
+         <!--  -->
+       <div>
+        <div id='table4'>
+
+        </div>
+    </div>
+
+<!--  -->
+<p>
+ <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample4" role="button" aria-expanded="false" aria-controls="collapseExample">
+   顯示/隱藏 地圖位置
+ </a>
+</p>
+<div class="collapse" id="collapseExample4">
+ <div class="card card-body" style="max-width: 350px;">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1594862074388!6m8!1m7!1sVKv64SiJ0MYd6R-yja3wgw!2m2!1d23.71070882805438!2d120.5479147243093!3f244.16937!4f0!5f0.7820865974627469" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <iframe 
+     width="300" 
+     height="300" 
+     frameborder="0" 
+     style="border:0" 
+     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCU9nbYDSYru_8OjeerfYllDsBtf5g0qFg&q=斗六永安郵局" 
+     allowfullscreen>
+ </iframe>
+ </div>
+</div>
+</div>
+<!--  -->
+    <div id='fifth' style="position: relative;">
+         <!--  -->
+    <div>
+        <div id='table5'>
+
+        </div>
+    </div>
+
+<!--  -->
+<p>
+ <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample5" role="button" aria-expanded="false" aria-controls="collapseExample">
+   顯示/隱藏 地圖位置
+ </a>
+</p>
+<div class="collapse" id="collapseExample5">
+ <div class="card card-body" style="max-width: 350px;">
+    <iframe src="https://www.google.com/maps/embed?pb=!4v1594862118791!6m8!1m7!1siOtziQaI-d_DbRd7ptXAPQ!2m2!1d23.67908943013165!2d120.5383348422685!3f100.76448!4f0!5f0.7820865974627469" width="300" height="300" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    <iframe 
+     width="300" 
+     height="300" 
+     frameborder="0" 
+     style="border:0" 
+     src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCU9nbYDSYru_8OjeerfYllDsBtf5g0qFg&q=斗六大崙郵局" 
+     allowfullscreen>
+ </iframe>
+ </div>
+</div>
+</div>
+<!-- fuild -->
+</div>
+</body>
+</html>
