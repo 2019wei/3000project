@@ -26,13 +26,17 @@ type:'get',
 data:{}, 
 async : false, //預設為true 非同步 
 error:function(){ 
-alert('重新整理一次'); 
+alert('當機啦，被多人點爆'); 
+},
+beforeSend:function(){
+    $("#loading").html("<img class='img-fluid mx-auto d-block mt-5' src='./Img/c2.gif' />");
 }, 
 success:function(data){ 
 yunlindata = data.filter(function(value){
     return value.hsnCd == 'P' && value.zipCd == '640'
 })
 console.log(yunlindata)
+$("#loading").hide()
 showTable(yunlindata)
 }
 });
@@ -72,6 +76,7 @@ function showTable(getData){
 </script>
 <body style="background-color: #D3D3D3; font-family: Microsoft JhengHei;" >
     <div class="container-fluid">
+<div id='loading'></div>
 <div class="d-flex justify-content-center"><img src="./Img/post.png" class="img-fluid"></div>
 <div id='first' style="position: relative;">
   <!--  -->
